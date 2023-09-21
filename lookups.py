@@ -43,6 +43,11 @@ class SourceName(Enum):
     COLLEGE = "college"
     SUPER_STORE = "super_store"
 
+class CsvUrl(Enum):
+    ELON_MUSK_TWEETS = 'https://storage.googleapis.com/kagglesdsdata/datasets/3563626/6206522/Emusk_2021_tweets.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230920%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230920T144512Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=33c16d7667b7d7b016856e3955505b7261e058d88c026b6586cba7c78b30feda5839a21220bd5d29a69e73a978711eac8d92d908cc08005c72ad6535a9a545f64f852e814f8fcf89e9468834fbfcfe7119470bcc1c119553b86e3f8c6554b3df4f83a34df0558904041585a32c9f0ad5b349558e78f15b25eb2179a842feec84c90c2eade403058bec18c5b3491460fbccd91d166d9f912ec36599b3cc7cef9fe7945d98fc3ba56adf75c27af5b5e7a2838408da40e4692f7603ecf5ccbd27f1ac347291fa23b6be83e8581828915be54f02651fed30ff1d70a02befa2d39138d80205218f0424b274b6119b40f8d94b31d0cb7f8721144511e2df5434dc25a0' 
+    BITCOIN_USD_HISTORICAL_DATA = 'https://www.coingecko.com/price_charts/export/1/usd.csv'
+    
+
 class SQLTablesToReplicate(Enum):
     RENTAL = "dvd_rental.rental"
     FILM = "dvd_rental.film"

@@ -12,7 +12,6 @@ from logging_handler import show_error_message
 from database_handler import return_data_as_df
 
 
-
 def return_create_statement_from_df(dataframe, schema_name, table_name):
     type_mapping = {
         'int64': 'INT',
@@ -39,19 +38,16 @@ def return_create_statement_from_df(dataframe, schema_name, table_name):
         create_table_statement += ",\n".join(fields)
         create_table_statement += "\n);"
 
-        
     except Exception as error:
         error_prefix = ErrorHandling.CREATE_TABLE_ERROR.value
         suffix = str(error)
         show_error_message(error_prefix, suffix)
     finally:
         return create_table_statement
-        
-
 
 
 def return_insert_into_sql_statement_from_df(dataframe, schema_name, table_name):
-    
+
     insert_statement = None
     try:
 
@@ -59,13 +55,13 @@ def return_insert_into_sql_statement_from_df(dataframe, schema_name, table_name)
             dataframe.reset_index(inplace=True)
 
         columns = [column.replace(" ", "_").replace("-", "_")
-                for column in dataframe.columns]
+                   for column in dataframe.columns]
         columns = ', '.join(columns)
         values_list = []
         for _, row in dataframe.iterrows():
             value_strs = []
             for val in row.values:
-                
+
                 if isinstance(val, list):
                     values = ",".join(val)
                     value_strs.append(f"'[{values}]'")
@@ -75,7 +71,7 @@ def return_insert_into_sql_statement_from_df(dataframe, schema_name, table_name)
                     # Escape single quotes in the string
                     val_escaped = val.replace("'", "''")
                     value_strs.append(f"'{val_escaped}'")
-                elif isinstance(val,pd.Timestamp):
+                elif isinstance(val, pd.Timestamp):
                     value_strs.append(f"'{val}'")
                 else:
                     value_strs.append(str(val))
@@ -86,7 +82,7 @@ def return_insert_into_sql_statement_from_df(dataframe, schema_name, table_name)
         values_list = ',\n'.join(values_list)
 
         insert_statement = f"INSERT INTO {schema_name}.{table_name} ({columns}) VALUES\n {values_list};"
-    
+
     except Exception as error:
         error_prefix = ErrorHandling.INSERT_INTO_TABLE_ERROR.value
         suffix = str(error)
@@ -100,18 +96,14 @@ def manipulate_df_data(dataframe, function):
 
     result = None
 
-
-    def get_blanks ():
+    def get_blanks():
         return dataframe[(dataframe == '').any(axis=1)]
-    
 
     def get_shape():
         return dataframe.shape
-    
 
     def get_length():
         return len(dataframe)
-    
 
     switch_function = {
 
@@ -132,61 +124,19 @@ def manipulate_df_data(dataframe, function):
         return result
 
 
+def download_csv_to_dataframe(url):
 
-
-def download_csv_to_dataframe(url,save_path):
     try:
-        response = requests.get(url)
-        response.raise_for_status()  
-        
-        with open(save_path, 'wb') as zip_file:
-            zip_file.write(response.content)
-        
-        with zipfile.ZipFile(save_path, 'r') as zip_ref:
-            csv_filename = zip_ref.namelist()[0]
-            with zip_ref.open(csv_filename) as csv_file:
-                df = pd.read_csv(csv_file)
-        
-        return df
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
-        return None
-
-
-def download_and_convert_csv(url):
-    try:
-        response = requests.get(url)
-
-        if response.status_code == 200:
-            zip_data = io.BytesIO(response.content)
-
-            with zipfile.ZipFile(zip_data) as zip_file:
-                csv_filename = zip_file.namelist()[0]
-
-                with zip_file.open(csv_filename) as csv_file:
-                    df = pd.read_csv(csv_file)
-
-                return df
-        else:
-            print("Failed to download the zip file. Status code:", response.status_code)
-            return None
-
-    except Exception as e:
-        print("An error occurred:", str(e))
-        return None
-
-
-
-def download_csv_to_dataframe_2(url):
-    try:
-        response = requests.get(url)
+        response = requests.get(url.value)
         response.raise_for_status()  # Check for any HTTP errors
-        
-        csv_text = StringIO(response.text)
-        
-        df = pd.read_csv(csv_text)
-        
-        return df
+        if response.status_code == 200:
+            csv_text = StringIO(response.text)
+            df = pd.read_csv(csv_text)
+            return df
+        else:
+            print("Failed to download the zip file. Status code:",
+                  response.status_code)
+            return None
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         return None
