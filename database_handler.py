@@ -51,30 +51,31 @@ def parse_date_columns(dataframe):
             error_prefix = ErrorHandling.DATE_CONVERSION_ERROR.value
             show_error_message(error_prefix,suffix)
     
-def return_data_as_df(file_executor, input_type, db_session = None):
-    return_dataframe = None
+def return_data_as_df(file_executor, input_type, db_session=None):
+    return_dataframe=None
     try:
         if input_type == InputTypes.CSV:
             return_dataframe = pd.read_csv(file_executor)
-            parse_date_columns(return_dataframe)
         elif input_type == InputTypes.EXCEL:
             return_dataframe = pd.read_excel(file_executor)
-            parse_date_columns(return_dataframe)
         elif input_type == InputTypes.SQL:
-            return_dataframe = pd.read_sql_query(con= db_session, sql= file_executor)
+            if db_session is None:
+                raise ValueError("db_session is required for SQL input type")
+            return_dataframe = pd.read_sql_query(con=db_session, sql=file_executor)
         else:
-            raise Exception("The file type does not exist, please check main function")
+            raise ValueError("The file type does not exist, please check main function")
+        
     except Exception as e:
-        suffix = str(e)
-        if input_type == InputTypes.CSV:
-            error_prefix = ErrorHandling.RETURN_DATA_CSV_ERROR.value
-        elif input_type == InputTypes.EXCEL:
-            error_prefix = ErrorHandling.RETURN_DATA_EXCEL_ERROR.value
-        elif input_type == InputTypes.SQL:
-            error_prefix = ErrorHandling.RETURN_DATA_SQL_ERROR.value
-        else:
-            error_prefix = ErrorHandling.RETURN_DATA_UNDEFINED_ERROR.value
-        show_error_message(error_prefix, suffix)
+        error_prefix = (
+            ErrorHandling.RETURN_DATA_CSV_ERROR.value
+            if input_type == InputTypes.CSV
+            else ErrorHandling.RETURN_DATA_EXCEL_ERROR.value
+            if input_type == InputTypes.EXCEL
+            else ErrorHandling.RETURN_DATA_SQL_ERROR.value
+            if input_type == InputTypes.SQL
+            else ErrorHandling.RETURN_DATA_UNDEFINED_ERROR.value
+        )
+        show_error_message(error_prefix, str(e))
     finally:
         return return_dataframe
 
