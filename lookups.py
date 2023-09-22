@@ -44,6 +44,7 @@ class SourceName(Enum):
     SUPER_STORE = "super_store"
 
 class CsvUrl(Enum):
+    Tweets_About_Big_Crypto_Hack='https://www.kaggle.com/datasets/marianna13/tweets-about-big-crypto-hack/download?datasetVersionNumber=1'
     ELON_MUSK_TWEETS = 'https://storage.googleapis.com/kagglesdsdata/datasets/3563626/6206522/Emusk_2021_tweets.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230920%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230920T144512Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=33c16d7667b7d7b016856e3955505b7261e058d88c026b6586cba7c78b30feda5839a21220bd5d29a69e73a978711eac8d92d908cc08005c72ad6535a9a545f64f852e814f8fcf89e9468834fbfcfe7119470bcc1c119553b86e3f8c6554b3df4f83a34df0558904041585a32c9f0ad5b349558e78f15b25eb2179a842feec84c90c2eade403058bec18c5b3491460fbccd91d166d9f912ec36599b3cc7cef9fe7945d98fc3ba56adf75c27af5b5e7a2838408da40e4692f7603ecf5ccbd27f1ac347291fa23b6be83e8581828915be54f02651fed30ff1d70a02befa2d39138d80205218f0424b274b6119b40f8d94b31d0cb7f8721144511e2df5434dc25a0' 
     BITCOIN_USD_HISTORICAL_DATA = 'https://www.coingecko.com/price_charts/export/1/usd.csv'
     COIN_AAVE_USD_HISTORICAL_DATA = 'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_Aave.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230921%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230921T082525Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=0f640c762aa89eec3b30480077b4b2f6f58f52b50dfe553612c38823b5e57f0f6f73524d7f1c9e24e42e1d0d826f71106ebb6c02c56bf66461688ed53da3920521d7f3552c1815728a8ec7b5eccc07756276d33958cda3f9a319aea9016b9fdd8effed64de3fd35635ebf06e6436be508e1d5cd91f828d1a27509059c5f3819122123625af0da1b3d5501eba33c336518f7ad28d793472ba69924f2f20698ceedb5c580e86d8cba1689891bc948f6a9438d359b8f922b919e19b3405d590b20339184b329e0ce948a18499089af461bd1aa2aca5830547db42563817ec93bf3c2823ffda39300b1d038028efeda1e15e268bfd007b864f7a31145100fe7eddb8'
@@ -107,3 +108,10 @@ class IncrementalField(Enum):
 class ETLStep(Enum):
     PRE_HOOK = 0
     HOOK = 1
+
+class DestinationName(Enum):
+    Datawarehouse = "dw_reporting"
+
+    class ETLActionType(Enum):
+        FULL_REFRESH = "full_refresh"
+        IncrementalField = "incremental"
