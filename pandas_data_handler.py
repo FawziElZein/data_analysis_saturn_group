@@ -26,11 +26,13 @@ def return_create_statement_from_df(dataframe, schema_name, table_name):
     try:
         if dataframe.index.name:
             sql_type = type_mapping.get(str(dataframe.index.dtype), 'TEXT')
-            fields.append(f"{dataframe.index.name} {sql_type} PRIMARY KEY")
+            modified_index_col = dataframe.index.name.replace(" ", "_").replace("-", "_")
+            fields.append(f"{modified_index_col} {sql_type} PRIMARY KEY")
+            # query = f"CREATE INDEX IF NOT EXISTS idx_{table_name}_{dataframe.index.name} ON {schema_name}.{table_name} ({dataframe.index.name});"
+            # execute_query(db_session,query)
 
         for column, dtype in dataframe.dtypes.items():
             modified_column = column.replace(" ", "_").replace("-", "_")
-
             sql_type = type_mapping.get(str(dtype), 'TEXT')
             fields.append(f"{modified_column} {sql_type}")
 
@@ -124,14 +126,17 @@ def manipulate_df_data(dataframe, function):
         return result
 
 
-def download_csv_to_dataframe(url):
-
+def download_csv_to_dataframe(index_url):
+    index = index_url.value[0]
+    url = index_url.value[1]
     try:
-        response = requests.get(url.value)
+        response = requests.get(url)
         response.raise_for_status()  # Check for any HTTP errors
         if response.status_code == 200:
             csv_text = StringIO(response.text)
-            df = pd.read_csv(csv_text)
+            df = return_data_as_df(file_executor=csv_text,input_type=InputTypes.CSV)
+
+            df.set_index(df.columns[index],inplace=True)
             return df
         else:
             print("Failed to download the zip file. Status code:",
@@ -140,3 +145,34 @@ def download_csv_to_dataframe(url):
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         return None
+
+
+
+def get_online_csv_into_df_list(*resources):
+
+    df_list = []
+    df_titles = []
+
+    for resource in resources:
+        for link in resource:
+            df_list.append(download_csv_to_dataframe(link))
+            df_titles.append(link.name.lower())
+    
+    return df_list,df_titles
+
+
+
+#NOT NEEDED FOR NOW
+def get_csv_into_df_list(dir_path):
+
+    df_list = []
+    df_titles = []
+
+    files = os.listdir(dir_path)
+    for file in files:
+        if file.endswith(".csv"):
+            df_list.append(return_data_as_df(db_session=None,
+                           file_executor=dir_path+'/'+file, input_type=InputTypes.CSV))
+            df_titles.append(file[:-4].replace(" ", "_").replace("-", "_"))
+
+    return df_list, df_titles
