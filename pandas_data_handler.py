@@ -28,8 +28,7 @@ def return_create_statement_from_df(dataframe, schema_name, table_name):
             sql_type = type_mapping.get(str(dataframe.index.dtype), 'TEXT')
             modified_index_col = dataframe.index.name.replace(" ", "_").replace("-", "_")
             fields.append(f"{modified_index_col} {sql_type} PRIMARY KEY")
-            # query = f"CREATE INDEX IF NOT EXISTS idx_{table_name}_{dataframe.index.name} ON {schema_name}.{table_name} ({dataframe.index.name});"
-            # execute_query(db_session,query)
+
 
         for column, dtype in dataframe.dtypes.items():
             modified_column = column.replace(" ", "_").replace("-", "_")
@@ -131,15 +130,15 @@ def download_csv_to_dataframe(index_url):
     url = index_url.value[1]
     try:
         response = requests.get(url)
-        response.raise_for_status()  # Check for any HTTP errors
+        # response.raise_for_status()  # Check for any HTTP errors
         if response.status_code == 200:
             csv_text = StringIO(response.text)
             df = return_data_as_df(file_executor=csv_text,input_type=InputTypes.CSV)
-
+            print(df)
             df.set_index(df.columns[index],inplace=True)
             return df
         else:
-            print("Failed to download the zip file. Status code:",
+            print("Failed to download CSV file. Status code:",
                   response.status_code)
             return None
     except Exception as e:
