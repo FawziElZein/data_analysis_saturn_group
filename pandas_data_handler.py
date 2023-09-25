@@ -130,11 +130,11 @@ def download_csv_to_dataframe(index_url):
     url = index_url.value[1]
     try:
         response = requests.get(url)
-        # response.raise_for_status()  # Check for any HTTP errors
+        response.raise_for_status()  # Check for any HTTP errors
         if response.status_code == 200:
             csv_text = StringIO(response.text)
             df = return_data_as_df(file_executor=csv_text,input_type=InputTypes.CSV)
-            print(df)
+            df = df.drop_duplicates(subset=df.columns[index])
             df.set_index(df.columns[index],inplace=True)
             return df
         else:
