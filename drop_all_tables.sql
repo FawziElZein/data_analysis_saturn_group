@@ -1,9 +1,30 @@
-DO $$ 
-DECLARE 
-    table_name text;
-BEGIN 
-    FOR table_name IN (SELECT table_name FROM information_schema.tables WHERE table_schema = 'your_schema_name' AND table_type = 'BASE TABLE') 
-    LOOP 
-        EXECUTE 'DROP TABLE IF EXISTS your_schema_name.' || table_name || ' CASCADE'; 
-    END LOOP; 
-END $$;
+DROP TABLE IF EXISTS
+	dw_reporting.etl_checkpoint,
+	dw_reporting.dim_coin,
+	dw_reporting.stg_crypto_db_binance_historical_price,
+	dw_reporting.stg_crypto_db_binancecoin_historical_price,
+	dw_reporting.stg_crypto_db_bitcoin_historical_price,
+	dw_reporting.stg_crypto_db_coins_info,
+	dw_reporting.stg_crypto_db_dogecoin_historical_price,
+	dw_reporting.stg_crypto_db_elon_musk_tweets,
+	dw_reporting.stg_crypto_db_ethereum_historical_price,
+	dw_reporting.stg_crypto_db_litecoin_historical_price,
+	dw_reporting.stg_crypto_db_tether_historical_price,
+	dw_reporting.stg_crypto_db_tron_historical_price,
+	dw_reporting.stg_crypto_db_usdcoin_historical_price,
+	dw_reporting.stg_crypto_db_xrp_historical_price,
+	dw_reporting.stg_crypto_db_binance_usd_historical_price,
+	dw_reporting.dim_time_bitcoin,
+	dw_reporting.dim_time_ethereum,
+	dw_reporting.dim_time_tether,
+	dw_reporting.dim_time_binancecoin,
+	dw_reporting.dim_time_xrp,
+	dw_reporting.dim_time_litecoin,
+	dw_reporting.dim_time_usdcoin,
+	dw_reporting.dim_time_binance_usd,
+	dw_reporting.dim_time_dogecoin,
+	dw_reporting.dim_time_tron
+	
+
+
+

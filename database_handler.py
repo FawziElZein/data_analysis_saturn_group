@@ -88,6 +88,8 @@ def execute_query(db_session, query):
         error_prefix = ErrorHandling.EXECUTE_QUERY_ERROR
         return_val = error_prefix
         suffix = str(e)
+        print("query")
+        print(query)
         show_error_message(error_prefix.value, suffix)
     finally:
         return return_val

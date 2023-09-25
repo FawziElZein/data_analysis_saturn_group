@@ -9,12 +9,13 @@ CREATE TABLE IF NOT EXISTS target_schema.dim_coin
     strengths TEXT,
     weaknesses TEXT
 );
+CREATE INDEX IF NOT EXISTS idx_symbol  ON target_schema.dim_coin(symbol);
 
 INSERT INTO target_schema.dim_coin
 (
     SELECT
-        symbol,
-        ï»¿Name,
+        ï»¿symbol,
+        name,
         founder,
         launch_date,
         security,
@@ -22,6 +23,14 @@ INSERT INTO target_schema.dim_coin
         weaknesses
     FROM target_schema.stg_crypto_db_coins_info
 )
+ON CONFLICT (symbol)
+DO UPDATE SET
+    name = EXCLUDED.name,
+    founder = EXCLUDED.founder,
+    launch_date = EXCLUDED.launch_date,
+    security = EXCLUDED.security,
+    strengths = EXCLUDED.strengths,
+    weaknesses = EXCLUDED.weaknesses;
 
 
 
