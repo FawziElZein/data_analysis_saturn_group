@@ -134,7 +134,7 @@ def download_csv_to_dataframe(index_url):
         if response.status_code == 200:
             csv_text = StringIO(response.text)
             df = return_data_as_df(file_executor=csv_text,input_type=InputTypes.CSV)
-            df = df.drop_duplicates(subset=df.columns[index])
+            # df = df.drop_duplicates(subset=df.columns[index])
             df.set_index(df.columns[index],inplace=True)
             return df
         else:

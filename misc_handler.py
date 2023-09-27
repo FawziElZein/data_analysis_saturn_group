@@ -3,7 +3,6 @@ from lookups import ErrorHandling, PreHookSteps,ETLStep,InputTypes,IncrementalFi
 from database_handler import return_query,execute_query, create_connection, close_connection,return_data_as_df
 from pandas_data_handler import return_create_statement_from_df,return_insert_into_sql_statement_from_df
 from logging_handler import show_error_message
-from lookups import PandasFunctions
 import pandas as pd
 
 def return_lookup_items_as_dict(lookup_item):
@@ -46,6 +45,7 @@ def create_insert_sql(db_session, source_name,df_source_list,df_titles,etl_step,
         for df_title, df_source in zip(df_titles,df_source_list):
             dst_table = f"stg_{source_name}_{df_title}"
             if etl_step == ETLStep.PRE_HOOK:
+                
                 create_stmt = return_create_statement_from_df(df_source, 'dw_reporting', dst_table)
                 execute_query(db_session=db_session, query= create_stmt)
                 index_name = df_source.index.name.replace(" ", "_").replace("-", "_")
@@ -55,6 +55,7 @@ def create_insert_sql(db_session, source_name,df_source_list,df_titles,etl_step,
                 if incremental_date_dict.get(df_title)=='index':
                     staging_df = df_source[df_source.index>etl_date]
                 else:
+
                     staging_df = df_source[df_source[incremental_date_dict.get(df_title)]>etl_date]
                 if len(staging_df):
                     insert_stmt = return_insert_into_sql_statement_from_df(staging_df, 'dw_reporting', dst_table)
