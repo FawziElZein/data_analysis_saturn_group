@@ -41,35 +41,27 @@ class PandasFunctions(Enum):
 class PreHookSteps(Enum):
     EXECUTE_SQL_QUERY = "execute_sql_folder"
 
-class SourceName(Enum):
-    CRYPTO_DB = "crypto_db"
+
 
 class CsvUrlCoinsInfo(Enum):
-    COINS_INFO = [0,'https://storage.googleapis.com/crypto_bucket_links/cryptocurrency-coins-data-info.csv']
+    COINS_INFO = [0,'https://storage.googleapis.com/csv_links/cryptocurrency-coins-data-info.csv']
 
 class CsvUrlTweets(Enum):
     ELON_MUSK_TWEETS = [0,'https://storage.googleapis.com/csv_links/elon_musk_tweets_clean_data.csv'] 
-    # Damaged csv file
-    # BIG_CRYTO_HACK_TWEETS=['https://storage.googleapis.com/crypto_bucket_links/big_crypto_hack_tweets.csv'] 
 
 class CoinsEnergyConsumption(Enum):
-    BITCOIN_ENERGY_CONSUMPTION = [0,'https://storage.googleapis.com/crypto_bucket_links/btc_energy_consumption.csv']
-
-    # BITCOIN_ABBREVIATION = [0,'https://storage.googleapis.com/crypto_bucket_links/btc_abbreviation_description.csv']
+    BITCOIN_ENERGY_CONSUMPTION = [0,'https://storage.googleapis.com/csv_links/btc_energy_consumption.csv']
 
 class CsvUrlHistoricalData(Enum):
-    # BITCOIN_HISTORICAL_PRICE = [0,'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_Bitcoin.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230924%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230924T115333Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=599b3f2050514125497898edb3709ca60db4a69832d429234279b3950ea5244a219f21db48cb6a07805c01263ef66c0e08ff23900fb5e2b3fcd20a1cb6e43c127f410ec6b5ab92b1c20426b9764c6b2000d23390ffff472d79a616a8482dd76ba9ddc0c94aa7943b5419ea40fb267907eda74e625ef8623b67537003364d092321ac0221ef5cc929fac9d8bea0ae776f7690e78a7e10ef231bf7aaa711616325b902d530be90e83ec0ed0a2f6cc238e34a88d0be6f649c0e947fe7e1288d4ac63015abe3219d5e069c5a7a47bc58ea086f7ff8ae7ef02cfb2d9350edaca18ed33fa89b3191bad80d85f48f7f607f863e709a894ba5f9a5077fc7bab44a6160c1']
-    # ETHEREUM_HISTORICAL_PRICE = [0,'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_Ethereum.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230925%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230925T114033Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=05d542691dc152d845f7529460b08fccd987b3df06d46b5603a04dc04504a4a48eada917f84e6858c06699fa24ce95fe272d746bb1283fd82179cb54c2c8e631c625383ed009bd9eb990603fcf3c41c36cb4e9ad17f457ea503ae92bcf80e41172e9ce51d40ffac63ab3028b74ecfcce3e41eb8c1b6d9e2d18f0bcc8b2590fbddd1308d252256da46121863eb677137800e37e8e2b115ba62c987b2df99da13c396eaa0f105102218fe4b73068be51e8bda9fec9572b42a28e4e32e181a58d2c3e9efe1cff2daf46b4574cbc672f97735b3d78e5531b701bb5b48dc2a328c52499df18ac33bf38268c74dee22a656c87c2eb5448f083b4163e40d66af5ea64f0']
-    # TETHER_HISTORICAL_PRICE = [0,'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_Tether.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230925%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230925T114617Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=76e5f0cde8b6929f806146bd89eb9e5c4d680e06bce92a94c482f86f3b2dbb1ccd7364229c28496405d726696fe0f41d416353603416533aa4a97dffca3c2811836421eb06fd22d8e49c7c1b0517e4f3aeefe3247fb2946923d7473495046293c37327551c85b3f55ac31b106d7228b549062e67bdeafa43a465010a2cdb2e7255be6a842ad53e77ae3f158242a24902f396e7c6805857f9f3fc5a117733a6356947bb4a7ef561558769de200acf815abd04493f9e5c298b2951243cb9af0c2d9d5d3ac7ba0948a580cc40550d2ac7ae2a808ca6a7044081a468e67677b8df4a21681e8ddbbbcc126f797eaf6d8880067dd4876c9aae57e93153e6c956fa5dbd']
-    # BINANCECOIN_HISTORICAL_PRICE = [0,'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_BinanceCoin.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230925%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230925T114717Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=374168ab0dd88be4fffddd7d7c94f8bc7cc5a8c33bdc71f16d8c0fee9fdb59b0a48fdd9c7c10634ab410780ea4b0aed093b1f016f381a38bb4bc913af075a34b809b3ba9035fbf175f91c322d032a7f2149b15e68bfec31814493c91aac832b4755acc38c67abd6b641f45bb23cf8a6b55095c57b5aa8a213b63e53e9487805f805d30dc10211357115fb16f119aba6912e0b87cfa125c14b1207c144ca364b0addb0a82cc72b0e7486e835c9dbfdeea6f487adb0237c0e7cad0a2340c07722ddc9fd2dae3ebd9acad1f44090f1dbc4ffd47c905c30c93b2dd67ae5be7dc10b2592e1c3f3c48c5d52f9569d9dcbcb3e436de1897653dbe9fbb580527cc48a8ed']
-    # XRP_HISTORICAL_PRICE = [0,'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_XRP.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230925%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230925T115850Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=454768b418ccd9e5d144e5f48fd09878665501abb94b8baa5f04b7f94affb18b2505a69c9deed96176012149b307b1c016366b69906cf36e673a2a06aaa971bcfb636055f67b67c05c06e4a6a6912eab4c77c74a6b10b41c49c3baaff4958cc1dfd286a96b8717794fe2160543c98b2c45e1e7731ef47956ba90836a4f61fa693d8a33a252be9065691f60fded7b691e2828df496336eca697c28181d996a587c4eb34097514f5649b8caa35963abfe38d39d596d9063f87097aab8cd3554d7a1cbe9e9ee4541ca12c0026c1b9d0857fc13c1b744753fc39ad1bda5e7a2b07a5fe507eeec5531cb82a42e487ca0443171d841d1ec13d692d9867bc27421bba94']
-    # LITECOIN_HISTORICAL_PRICE = [0,'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_Litecoin.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230925%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230925T115927Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=2891aa5d3e7c3a31c3bc56bb19fbe2e2898b6c3bc6f52d7d166bf7f74da856465f6198c89a6e2eb3d2665bfac66b2ee1f5c7644cad73f95a2e891d522059543149a475e0dea03902f4d5a99c95c55fa9b66901c3d42e4c1bebe21242bddce03be70b29cfe7127252f50b2de97fb412a077c021c7f7fd3c31bf234fb0a07c78c59ef49cb3a8853abebef9ae1ed5613c1297f833c3f61de78f1829c85dcf96c38c870e8ac1b90e2220d33f7bfdcc9853039804b859e98cdcc871de40c4a02fe7cf292e333def12183716d2c568dd282ef947c66d9dfe3adb1b6a68ffc80b36854612890e72c9ecaa1a2c997d28b5bdfaf2b705f85e2dc4e3013ec1eb7a01bde80b']
-    # USDCOIN_HISTORICAL_PRICE = [0,'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_USDCoin.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230925%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230925T121102Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=1e95f761abd24cf2d76954925d18803ac2834024dfe7024c446ad8bf560f4f836368beb2c5659d27fc48868509fd833c2b6b9ccf018627d2b61fe93c87e5e87673e355099b24f92f1b0ab2a720129ca3a9f4e70950501efee1b908a9b7689fdb28ce2e58f87490cfa6c2074295badc267e1b76300e77b1ba795cdd527c259e2d3f1dde38f0793bcd99a6be339e80b68755c171d5e3d874d377400ae2ccacee07fef96c738f63cfc14511e04f405aea0b413351098ebaf1d40188ac25b7ae363c4bb510b656a386f865caf5c7d41dac58ba115f0867086b293f3e00ffe7ad64c33eb1cf69bbfb52585321d295ef582201cf31af97f5819f8f04ea13d93f40e996']
-    # DOGECOIN_HISTORICAL_PRICE = [0,'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_Dogecoin.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230925%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230925T120603Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=268dc97aea9252f3d20e77e5957ef01cd6f603ea989bc8633fdc5c81acfd82c193e746931349c8607153ecf80ae7b71055742c629cdaffc83659ff447ff3f9360bd369ae0e822e061021993773287c38711b887a8617a97f9d03aebd498e502b1b64a452fa98bf05eb739f45223fb80db866fbf792a5b2759e7ff83195ae390f0cd000610a78bd7c523e9c4674f22255a0159ff456da85bfbe7ac8c501f76d1992d4b3268351248035ccc10c65167ebefd404f216b586fd9ef043b70b044019e90a8425f5b940a3023eda93332bbd1ce0de282392a6689219e5fab6c0e58134e6f8cd2f08838edf6bddc57a51f71d1df9fa8099a4cae5cfb0e995f241d27cfe6']
-    # TRON_HISTORICAL_PRICE= [0,'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_Tron.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230925%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230925T120737Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=32965ed45bb28bb45192d43eee435cf06e4962e1757274e3fdab8c0e85e1af4a1baa9b0b133c9891f03b1288d8df7902040cc39ef2b844e26d9bf2650c1e240448685ce5e35357176943ca8b147d447630fd63c223cb66528d5e04b9c23a255128ccc10bde637fd7553ca8478f9d8c5303df0116b46a528020cd838fee5f5eb3ea602e3a78ac3aa39d6e6b59125e6e45886aecfc537abd9a6b63210a61b3ecb45d1895528137270c37794fc859d697dd6fef64e71aa89a09874ad5f19153f6dac7831bef5e4abed453bedd52ee7a00809facd739480d52ba154370048b531f38165c07ade2924c16e0176292d3852a491da133ac45d3688b7b7b567cea04f06b']
-    # BINANCE_USD_HISTORICAL_PRICE = [0,'https://storage.googleapis.com/crypto_bucket_links/BNB-USD.csv']
-    # CRYPTO_TRANSACTIONS = [0,'https://storage.googleapis.com/csv_links/dex_transactions_post_cleaning.csv']
+    CRYPTO_TRANSACTIONS = [0,'https://storage.googleapis.com/csv_links/dex_transactions_post_cleaning.csv']
     CRYPTO_TWEETS = [0,'https://storage.googleapis.com/csv_links/dataset_52_person_tweets.csv']
+
+    #minified version
+    # CRYPTO_TRANSACTIONS = [0,'https://storage.googleapis.com/csv_links/dex_transactions_post_cleaning_MIN-Version.csv']
+
+    BTC_TWEETS_SENTIMENTS = [0,'https://storage.googleapis.com/csv_links/btc_daily_2021_2023.csv']
+    ETH_TWEETS_SENTIMENTS = [0,'https://storage.googleapis.com/csv_links/eth_daily_2021_2023.csv']
+    DOGE_TWEETS_SENTIMENTS = [0,'https://storage.googleapis.com/csv_links/doge_daily_2021_2023.csv']
 
     # COIN_AAVE_KAGGLE = [0,'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_Aave.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230921%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230921T082525Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=0f640c762aa89eec3b30480077b4b2f6f58f52b50dfe553612c38823b5e57f0f6f73524d7f1c9e24e42e1d0d826f71106ebb6c02c56bf66461688ed53da3920521d7f3552c1815728a8ec7b5eccc07756276d33958cda3f9a319aea9016b9fdd8effed64de3fd35635ebf06e6436be508e1d5cd91f828d1a27509059c5f3819122123625af0da1b3d5501eba33c336518f7ad28d793472ba69924f2f20698ceedb5c580e86d8cba1689891bc948f6a9438d359b8f922b919e19b3405d590b20339184b329e0ce948a18499089af461bd1aa2aca5830547db42563817ec93bf3c2823ffda39300b1d038028efeda1e15e268bfd007b864f7a31145100fe7eddb8']
     # COIN_CARDANO_USD_HISTORICAL_DATA = 'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_Cardano.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230921%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230921T084452Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=47c0fc73cd37d469cca761958a9ac9de5654e7243f9e6d22a8420b4d0a9b916d3bfe378d6599be36096f81a56f313a66d480e9f0e8cdb57166ab6716647ee09d0a6fa566eb1136e689024492eea6ebc5c414efc7e5e959c1fcdc38b6c7fb201c34e83ff5067dc06cff69fddc880d8ff248ce5f478fab0fd6e3ce48c051afe9d8629db3fcf3a131ef0e80354e4bd0c11f18b3a4adb2bd000f0e157741f318c07b630bf5815ac10a72bf4a503d1142fd902f03eadcbb02b277955d2ec94216b187f6c5ad645a394aa3c78cb656ba67953fecc5f6b5f46c8f802766b2fe5df036480e0f3c1035585793ae3ad6309459e1c819d4fb317af79a7878c44bc100d958f4'
@@ -88,27 +80,32 @@ class CsvUrlHistoricalData(Enum):
     # COIN_WRAPPEDBITCOIN_USD_HISTORICAL_DATA = 'https://storage.googleapis.com/kagglesdsdata/datasets/1869/2402293/coin_WrappedBitcoin.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230921%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20230921T091152Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=a7cc33b8834f3f75ecbdd8b5cf25b7c8122c16cb5c65cacb44fa542ca5c4012c5b13aa27669ded62fc68156429326da1e2755d2db91375deef0bf6172be884c57b8470a7e9bf9d6eba73c2f60e29ded7c3164653ce9c0f54bd83e2f57ec475b040882441d4d198202c36dd8467c9330300bb337aabe380c7a278964bdcfdd49ebfd7a212a29a1c66acd322557ca9b74b16d93cbe6623f77bcf2204b4b9b32f12cbb9da43dc5fcf2894166acba23a15e5e2906aa538cff1d8fa325438692089f56c8974cd7c552426ec6ca4aa7c1ebe8abb0925d858f9cc304aaa69c658a24024b5cec49356367a4d3b5eb8d94bca4a5574de6ec59e9c5094cf3cac3ee3aed724'
     
 
-class DestinationName(Enum):
-    Datawarehouse = "dw_reporting"
-    
+class DestinationDatabase(Enum):
+    SCHEMA_NAME = "dw_reporting"
+    DATABASE_NAME = "crypto_db"
+
 
 class IncrementalField(Enum):
     COINS_INFO = "coins_info_Launch date"
     ELON_MUSK_TWEETS = "elon_musk_tweets_index"
-    BITCOIN_HISTORICAL_PRICE = "bitcoin_historical_price_Date"
-    ETHEREUM_HISTORICAL_PRICE = "ethereum_historical_price_Date"
-    TETHER_HISTORICAL_PRICE = "tether_historical_price_Date"
-    BINANCECOIN_HISTORICAL_PRICE = "binancecoin_historical_price_Date"
-    XRP_HISTORICAL_PRICE = "xrp_historical_price_Date"
-    LITECOIN_HISTORICAL_PRICE = "litecoin_historical_price_Date"
-    USDCOIN_HISTORICAL_PRICE = "usdcoin_historical_price_Date"
-    DOGECOIN_HISTORICAL_PRICE = "dogecoin_historical_price_Date"
-    TRON_HISTORICAL_PRICE = "tron_historical_price_Date"
+    BITCOIN_HISTORICAL_PRICE = "bitcoin_historical_price_index"
+    ETHEREUM_HISTORICAL_PRICE = "ethereum_historical_price_index"
+    TETHER_HISTORICAL_PRICE = "tether_historical_price_index"
+    BINANCECOIN_HISTORICAL_PRICE = "binancecoin_historical_price_index"
+    XRP_HISTORICAL_PRICE = "xrp_historical_price_index"
+    LITECOIN_HISTORICAL_PRICE = "litecoin_historical_price_index"
+    USDCOIN_HISTORICAL_PRICE = "usdcoin_historical_price_index"
+    DOGECOIN_HISTORICAL_PRICE = "dogecoin_historical_price_index"
+    TRON_HISTORICAL_PRICE = "tron_historical_price_index"
     BINANCE_USD_HISTORICAL_PRICE = "binance_usd_historical_price_index"
     CRYPTO_TRANSACTIONS = "crypto_transactions_Date Time"
     BITCOIN_ENERGY_CONSUMPTION = "bitcoin_energy_consumption_index"
     BITCOIN_ABBREVIATION = "bitcoin_abbreviation_Abbrev"
     CRYPTO_TWEETS = "crypto_tweets_created_at"
+    BTC_TWEETS_SENTIMENTS = "btc_tweets_sentiments_index"
+    ETH_TWEETS_SENTIMENTS = "eth_tweets_sentiments_index"
+    DOGE_TWEETS_SENTIMENTS = "doge_tweets_sentiments_index"
+    
 class ETLStep(Enum):
     PRE_HOOK = "prehook"
     HOOK = "hook"

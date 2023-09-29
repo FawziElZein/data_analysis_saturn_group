@@ -14,7 +14,7 @@ from database_handler import return_data_as_df
 
 def return_create_statement_from_df(dataframe, schema_name, table_name):
     type_mapping = {
-        'int64': 'INT',
+        'int64': 'BIGINT',
         'float64': 'FLOAT',
         'datetime64[ns]': 'TIMESTAMP',
         'bool': 'BOOLEAN',

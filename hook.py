@@ -1,6 +1,6 @@
 from database_handler import execute_query, create_connection, close_connection,return_data_as_df
 from pandas_data_handler import return_insert_into_sql_statement_from_df
-from lookups import ErrorHandling,InputTypes, IncrementalField, SourceName, ETLStep,DestinationName
+from lookups import ErrorHandling,InputTypes, IncrementalField, ETLStep,DestinationDatabase
 from datetime import datetime
 from misc_handler import execute_sql_folder, create_insert_sql
 from logging_handler import show_error_message
@@ -70,8 +70,8 @@ def execute_hook(df_src_list,df_src_titles):
         db_session = create_connection()
         create_etl_checkpoint(db_session)
         etl_date, does_etl_time_exists = return_etl_last_updated_date(db_session)
-        create_insert_sql(db_session,SourceName.CRYPTO_DB,df_src_list,df_src_titles, ETLStep.HOOK, etl_date)
-        execute_sql_folder(db_session, './SQL_Commands', ETLStep.HOOK, DestinationName.Datawarehouse)
+        create_insert_sql(db_session,DestinationDatabase.DATABASE_NAME,df_src_list,df_src_titles, ETLStep.HOOK, etl_date)
+        execute_sql_folder(db_session, './SQL_Commands', ETLStep.HOOK, DestinationDatabase.SCHEMA_NAME)
         #last step
         insert_or_update_etl_checkpoint(db_session, does_etl_time_exists,datetime.now())
         close_connection(db_session)

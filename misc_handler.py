@@ -5,6 +5,11 @@ from pandas_data_handler import return_create_statement_from_df,return_insert_in
 from logging_handler import show_error_message
 import pandas as pd
 
+def return_staging_tables_as_list():
+    tables = [str(table.name).lower() for table in IncrementalField]
+    return tables
+
+    
 def return_lookup_items_as_dict(lookup_item):
     enum_dict = {str(item.name).lower():item.value.replace(item.name.lower() + "_","") for item in lookup_item}
     return enum_dict
@@ -22,7 +27,6 @@ def return_tables_by_schema(schema_name):
 def execute_sql_folder(db_session, sql_command_directory_path, etl_step, target_schema):
     sql_files = [sqlfile for sqlfile in os.listdir(sql_command_directory_path) if sqlfile.endswith('.sql')]
     sorted_sql_files = sorted(sql_files)
-
     for sql_file in sorted_sql_files:
         file_title = sql_file.split('-')
         if file_title[1] == etl_step.value:
@@ -48,6 +52,7 @@ def create_insert_sql(db_session, source_name,df_source_list,df_titles,etl_step,
                 
                 create_stmt = return_create_statement_from_df(df_source, 'dw_reporting', dst_table)
                 execute_query(db_session=db_session, query= create_stmt)
+
                 index_name = df_source.index.name.replace(" ", "_").replace("-", "_")
                 create_sql_staging_table_index(db_session, 'dw_reporting', dst_table, index_name)
             elif etl_step == ETLStep.HOOK:
