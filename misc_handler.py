@@ -1,5 +1,5 @@
 import os
-from lookups import ErrorHandling, PreHookSteps,ETLStep,InputTypes,IncrementalField
+from lookups import ErrorHandling,ETLStep,InputTypes,IncrementalField,CsvUrlTweets
 from database_handler import return_query,execute_query, create_connection, close_connection,return_data_as_df
 from pandas_data_handler import return_create_statement_from_df,return_insert_into_sql_statement_from_df
 from logging_handler import show_error_message
@@ -27,7 +27,9 @@ def return_tables_by_schema(schema_name):
 def execute_sql_folder(db_session, sql_command_directory_path, etl_step, target_schema):
     sql_files = [sqlfile for sqlfile in os.listdir(sql_command_directory_path) if sqlfile.endswith('.sql')]
     sorted_sql_files = sorted(sql_files)
+    counter = 0
     for sql_file in sorted_sql_files:
+        counter+=1
         file_title = sql_file.split('-')
         if file_title[1] == etl_step.value:
             with open(os.path.join(sql_command_directory_path,sql_file), 'r') as file:
@@ -35,7 +37,7 @@ def execute_sql_folder(db_session, sql_command_directory_path, etl_step, target_
                 sql_query = sql_query.replace('target_schema', target_schema.value)
                 return_val = execute_query(db_session= db_session, query= sql_query)
                 if not return_val == ErrorHandling.NO_ERROR:
-                    raise Exception(f"{PreHookSteps.EXECUTE_SQL_QUERY.value} = SQL File Error on SQL FILE = " +  str(sql_file))
+                    raise Exception(f"Error executing SQL File on = " +  str(sql_file))
 
 
 def create_sql_staging_table_index(db_session,source_name, table_name, index_val):
@@ -60,7 +62,6 @@ def create_insert_sql(db_session, source_name,df_source_list,df_titles,etl_step,
                 if incremental_date_dict.get(df_title)=='index':
                     staging_df = df_source[df_source.index>etl_date]
                 else:
-
                     staging_df = df_source[df_source[incremental_date_dict.get(df_title)]>etl_date]
                 if len(staging_df):
                     insert_stmt = return_insert_into_sql_statement_from_df(staging_df, 'dw_reporting', dst_table)

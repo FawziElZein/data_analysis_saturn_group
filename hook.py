@@ -71,6 +71,7 @@ def execute_hook(df_src_list,df_src_titles):
         create_etl_checkpoint(db_session)
         etl_date, does_etl_time_exists = return_etl_last_updated_date(db_session)
         create_insert_sql(db_session,DestinationDatabase.DATABASE_NAME,df_src_list,df_src_titles, ETLStep.HOOK, etl_date)
+        
         execute_sql_folder(db_session, './SQL_Commands', ETLStep.HOOK, DestinationDatabase.SCHEMA_NAME)
         #last step
         insert_or_update_etl_checkpoint(db_session, does_etl_time_exists,datetime.now())

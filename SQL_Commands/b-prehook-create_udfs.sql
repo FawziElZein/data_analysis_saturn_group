@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION dw_reporting.get_bitcoin_name(crypto_symbol TEXT)
+CREATE OR REPLACE FUNCTION target_schema.get_bitcoin_name(crypto_symbol TEXT)
 RETURNS text AS
 $$
 DECLARE
@@ -25,7 +25,7 @@ $$
 LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION dw_reporting.get_current_coin_price(coin_symbol VARCHAR(50),amount DOUBLE PRECISION,date_time TIMESTAMP)
+CREATE OR REPLACE FUNCTION target_schema.get_current_coin_price(coin_symbol VARCHAR(50),amount DOUBLE PRECISION,date_time TIMESTAMP)
 RETURNS DOUBLE PRECISION AS $$
 DECLARE
 	coin_name TEXT;
@@ -33,18 +33,18 @@ DECLARE
 	price_result DOUBLE PRECISION;
 BEGIN
 
-	coin_name := dw_reporting.get_bitcoin_name(coin_symbol);
+	coin_name := target_schema.get_bitcoin_name(coin_symbol);
 	IF coin_name !='unknown' THEN
 	
 		query:= '
 			SELECT 
 				(high+low)/2 AS mid_price
-			FROM dw_reporting.dim_time_'||coin_name||'
+			FROM target_schema.dim_time_'||coin_name||'
 			WHERE CAST(date AS DATE)= CAST('''||date_time||''' as DATE)';
 		EXECUTE query INTO price_result;
 	ELSE
 		price_result :=NULL;
 	END IF;
-  RETURN ROUND(CAST(price_result * amount AS DECIMAL),1);
+  RETURN ROUND(CAST(price_result * amount AS DECIMAL),5);
 END;
 $$ LANGUAGE plpgsql;
