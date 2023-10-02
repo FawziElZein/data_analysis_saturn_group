@@ -1,4 +1,4 @@
-CREATE TABLE target_schema.agg_daily_doge_coin_sentiments(
+CREATE TABLE IF NOT EXISTS target_schema.agg_daily_doge_coin_sentiments(
     datetime DATE,
     tweet_id DOUBLE PRECISION,
 	datetime_tweet_id VARCHAR(200) PRIMARY KEY NOT NULL,

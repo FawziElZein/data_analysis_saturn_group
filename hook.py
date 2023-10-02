@@ -1,6 +1,6 @@
 from database_handler import execute_query, create_connection, close_connection,return_data_as_df
 from pandas_data_handler import return_insert_into_sql_statement_from_df
-from lookups import ErrorHandling,InputTypes, IncrementalField, ETLStep,DestinationDatabase
+from lookups import ErrorHandling,InputTypes,ETLStep,DestinationDatabase
 from datetime import datetime
 from misc_handler import execute_sql_folder, create_insert_sql
 from logging_handler import show_error_message

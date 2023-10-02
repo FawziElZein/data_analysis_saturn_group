@@ -52,7 +52,7 @@ class DestinationDatabase(Enum):
     DATABASE_NAME = "crypto_db"
 
 
-class IncrementalField(Enum):
+class DateField(Enum):
     COINS_INFO = "coins_info_Launch date"
     ELON_MUSK_TWEETS = "elon_musk_tweets_index"
     DATASET_MUTLI_COINS_TWEETS = "dataset_multi_coins_tweets_created_at"

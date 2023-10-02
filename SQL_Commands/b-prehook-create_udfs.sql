@@ -6,16 +6,16 @@ DECLARE
 BEGIN
 
     CASE TRIM(BOTH ' ' FROM crypto_symbol)
-        WHEN 'BTC' THEN coin_name := 'bitcoin';
-        WHEN 'ETH' THEN coin_name := 'ethereum';
-        WHEN 'USDT' THEN coin_name := 'tether';
-        WHEN 'BNB' THEN coin_name := 'binancecoin';
+        WHEN 'BTC' THEN coin_name := 'bitcoin'; 
+        WHEN 'ETH' THEN coin_name := 'ethereum'; 
+        WHEN 'USDT' THEN coin_name := 'tether'; 
+        WHEN 'BNB' THEN coin_name := 'binancecoin'; 
         WHEN 'XRP' THEN coin_name := 'xrp';
-        WHEN 'LTC' THEN coin_name := 'litecoin';
-        WHEN 'USDC' THEN coin_name := 'usdcoin';
-        WHEN 'DOGE' THEN coin_name := 'dogecoin';
-        WHEN 'TRX' THEN coin_name := 'tron';
-        WHEN 'BUSD' THEN coin_name := 'binance_usd';
+        WHEN 'LTC' THEN coin_name := 'litecoin'; 
+        WHEN 'USDC' THEN coin_name := 'usdcoin'; 
+        WHEN 'DOGE' THEN coin_name := 'dogecoin'; 
+        WHEN 'TRX' THEN coin_name := 'tron'; 
+        WHEN 'BUSD' THEN coin_name := 'binance_usd'; 
         ELSE coin_name := 'unknown';
     END CASE;
     

@@ -1,12 +1,12 @@
 import os
-from lookups import ErrorHandling,ETLStep,InputTypes,IncrementalField,CsvUrlTweets
+from lookups import ErrorHandling,ETLStep,InputTypes,DateField,CsvUrlTweets
 from database_handler import return_query,execute_query, create_connection, close_connection,return_data_as_df
 from pandas_data_handler import return_create_statement_from_df,return_insert_into_sql_statement_from_df
 from logging_handler import show_error_message
 import pandas as pd
 
 def return_staging_tables_as_list():
-    tables = [str(table.name).lower() for table in IncrementalField]
+    tables = [str(table.name).lower() for table in DateField]
     return tables
 
     
@@ -58,11 +58,11 @@ def create_insert_sql(db_session, source_name,df_source_list,df_titles,etl_step,
                 index_name = df_source.index.name.replace(" ", "_").replace("-", "_")
                 create_sql_staging_table_index(db_session, 'dw_reporting', dst_table, index_name)
             elif etl_step == ETLStep.HOOK:
-                incremental_date_dict = return_lookup_items_as_dict(IncrementalField)
-                if incremental_date_dict.get(df_title)=='index':
+                date_dict = return_lookup_items_as_dict(DateField)
+                if date_dict.get(df_title)=='index':
                     staging_df = df_source[df_source.index>etl_date]
                 else:
-                    staging_df = df_source[df_source[incremental_date_dict.get(df_title)]>etl_date]
+                    staging_df = df_source[df_source[date_dict.get(df_title)]>etl_date]
                 if len(staging_df):
                     insert_stmt = return_insert_into_sql_statement_from_df(staging_df, 'dw_reporting', dst_table)
                     execute_query(db_session=db_session, query= insert_stmt)

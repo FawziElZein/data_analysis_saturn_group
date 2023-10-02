@@ -1,4 +1,4 @@
-CREATE TABLE target_schema.fct_crypto_tweets (
+CREATE TABLE IF NOT EXISTS target_schema.fct_crypto_tweets (
 	created_at DATE,
 	full_text TEXT,
 	favorite_count INTEGER,

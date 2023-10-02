@@ -91,7 +91,7 @@ def return_insert_into_sql_statement_from_df(dataframe, schema_name, table_name)
 
 
 def download_csv_to_dataframe(index_url):
-    index = index_url.value[0]
+    index = index_url.value[0] 
     url = index_url.value[1]
     try:
         response = requests.get(url)

@@ -1,4 +1,4 @@
-CREATE TABLE target_schema.agg_daily_crypto_sentiments(
+CREATE TABLE IF NOT EXISTS target_schema.agg_daily_crypto_sentiments(
     created_at DATE,
     coin VARCHAR(20),
 	created_at_coin VARCHAR(200) PRIMARY KEY NOT NULL,
