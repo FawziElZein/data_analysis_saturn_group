@@ -23,7 +23,6 @@ def return_tables_by_schema(schema_name):
             schema_tables.append(table.split('.')[1])
     return schema_tables
 
-
 def execute_sql_folder(db_session, sql_command_directory_path, etl_step, target_schema):
     sql_files = [sqlfile for sqlfile in os.listdir(sql_command_directory_path) if sqlfile.endswith('.sql')]
     sorted_sql_files = sorted(sql_files)

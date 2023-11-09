@@ -8,7 +8,6 @@ from lookups import InputTypes, ErrorHandling
 from logging_handler import show_error_message
 from database_handler import return_data_as_df
 
-
 def return_create_statement_from_df(dataframe, schema_name, table_name):
     type_mapping = {
         'int64': 'BIGINT',
@@ -111,8 +110,6 @@ def download_csv_to_dataframe(index_url):
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         return None
-
-
 
 def get_online_csv_into_df_list(*resources):
 
