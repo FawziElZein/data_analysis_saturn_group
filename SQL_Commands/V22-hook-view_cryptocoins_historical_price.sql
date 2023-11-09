@@ -3,18 +3,17 @@
 DROP VIEW IF EXISTS target_schema.vw_crypto_coins_info;
 
 CREATE VIEW target_schema.vw_crypto_coins_info AS
-
-SELECT
-	symbol,
-    name,
-    founder,
-    launch_date,
-    security,
-    usage,
-    strengths,
-    weaknesses,
-    country
-FROM target_schema.dim_coin;
+	SELECT
+		symbol,
+		name,
+		founder,
+		launch_date,
+		security,
+		usage,
+		strengths,
+		weaknesses,
+		country
+	FROM target_schema.dim_coin;
 
 -- Cryto historical price View
 
