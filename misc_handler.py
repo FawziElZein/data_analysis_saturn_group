@@ -25,7 +25,7 @@ def return_tables_by_schema(schema_name):
 
 def execute_sql_folder(db_session, sql_command_directory_path, etl_step, target_schema):
     sql_files = [sqlfile for sqlfile in os.listdir(sql_command_directory_path) if sqlfile.endswith('.sql')]
-    sorted_sql_files = sorted(sql_files)
+    sorted_sql_files = sorted(sql_files, key=lambda x: int(x[1:x.index('-')]))
     counter = 0
     for sql_file in sorted_sql_files:
         counter+=1
