@@ -112,6 +112,23 @@ def download_csv_to_dataframe(index_url):
         print(f"An error occurred: {str(e)}")
         return None
 
+def download_csv_to_dataframe(index_url):
+    try:
+        response = requests.get(index_url)
+        response.raise_for_status()  # Check for any HTTP errors
+        if response.status_code == 200:
+            csv_text = StringIO(response.text)
+            df = return_data_as_df(file_executor=csv_text,input_type=InputTypes.CSV)
+        else:
+            print("Failed to download CSV file. Status code:",
+                  response.status_code)
+            return None
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        return None
+
+
+
 
 
 def get_online_csv_into_df_list(*resources):
