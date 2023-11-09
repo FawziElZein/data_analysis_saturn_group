@@ -31,8 +31,6 @@ def get_coin_symbol(coin_name):
             return 'BUSD'
         return coin_name.upper()
 
-
-
 def preprocess_text(text):
     # Preprocessing function
     stop_words = set(stopwords.words('english'))
@@ -52,8 +50,6 @@ def preprocess_text(text):
         # join tokens back into text
         text = ' '.join(tokens)
     return text
-
-
 
 def analyze_sentiment(resources):
     df_list, df_titles = get_online_csv_into_df_list(resources)

@@ -9,7 +9,6 @@ import datetime
 import os
 from sentiment_analysis import analyze_sentiment
 
-
 def execute_prehook(sql_command_directory_path = './SQL_Commands'):
     try:
         
